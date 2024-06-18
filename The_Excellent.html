@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Excellent</title>
+    <!-- Favicon -->
+    <link rel="icon" href="The_Grand_Tour_Logo.svg.png" type="image/x-icon">
+    <!-- Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            scroll-behavior: smooth;
+        }
+
+        header {
+            background-image: url('Clarkson.webp');
+            background-size: cover;
+            background-position: center;
+            color: black;
+            font-size: large;
+            padding: 2rem 0;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 700px;
+            position: relative;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(173, 82, 82, 0.342);
+        }
+
+        header div {
+            position: relative;
+            z-index: 1;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #66000e;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: 0 1rem;
+        }
+
+        nav .nav-links {
+            display: flex;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        }
+
+
+        nav a {
+            color: white;
+            padding: 1rem;
+            text-decoration: none;
+            text-transform: uppercase;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+
+        nav a:hover {
+            color: #fd7e14;
+            /* Orange color */
+            transform: scale(1.1);
+            /* Pop effect */
+            background-color: #e70a0a;
+            /* Optional: if you want a background color change on hover */
+        }
+
+
+        .navbar-light {
+            padding: 0;
+        }
+
+        .navbar-light .form-control {
+            margin-right: 0.5rem;
+        }
+
+        .container {
+            padding: 2rem;
+        }
+
+        .navbar button:hover {
+            background-color: #fd7e14;
+            opacity: 100;
+        }
+
+        footer {
+            background-color: #530c07;
+            color: white;
+            text-align: center;
+            padding: 1rem 0;
+            position: relative;
+            width: 100%;
+            bottom: 0;
+        }
+
+        .card {
+            transition: transform 0.3s;
+        }
+
+        .card:hover {
+            transform: scale(1.25);
+            z-index: 2;
+        }
+
+        #contact {
+            background-color: #fff;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        #contact h2 {
+            margin-bottom: 1rem;
+            font-size: 2rem;
+        }
+
+        #contact p {
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+
+        #contact address {
+            font-style: normal;
+            line-height: 1.6;
+        }
+
+        #contact form .form-group {
+            margin-bottom: 1rem;
+        }
+
+        #contact form .btn {
+            background-color: #66000e;
+            border: none;
+        }
+
+        #contact form .btn:hover {
+            background-color: #e70a0a;
+        }
+
+        @keyframes slideInFromLeft {
+            0% {
+                opacity: 0;
+                transform: translateX(-100%);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInFromRight {
+            0% {
+                opacity: 0;
+                transform: translateX(100%);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInFromTop {
+            0% {
+                opacity: 0;
+                transform: translateY(-100%);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInFromBottom {
+            0% {
+                opacity: 0;
+                transform: translateY(100%);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .welcome-title,
+        .welcome-text,
+        .animated {
+            opacity: 0;
+            transition: opacity 1s, transform 1s;
+            animation: slideInFromLeft 1s forwards;
+        }
+
+        .welcome-text:hover {
+            color: #fd7e14;
+        }
+
+        .visible-left {
+            animation: slideInFromLeft 1s forwards;
+        }
+
+        .visible-right {
+            animation: slideInFromRight 1s forwards;
+        }
+
+        .visible-top {
+            animation: slideInFromTop 1s forwards;
+        }
+
+        .visible-bottom {
+            animation: slideInFromBottom 1s forwards;
+        }
+
+        .container_img {
+            animation: slideInFromRight 1s ease forwards;
+            opacity: 0;
+            transition: opacity 1s, transform 1s;
+        }
+
+        @media (max-width: 768px) {
+            header {
+                height: 500px;
+                padding: 1rem;
+            }
+
+            .nav .nav-links {
+                flex-direction: column;
+            }
+
+            nav a {
+                padding: 0.5rem;
+            }
+
+            .container {
+                padding: 1rem;
+            }
+        }
+
+
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background-color: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            position: relative;
+            background-color: #fefefe;
+            border: none;
+            width: 100%;
+            max-width: 90%;
+            height: 90%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .close {
+            color: red;
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 35px;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 2;
+        }
+
+        .modal img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .footer {
+            background-color: #530c07;
+            color: white;
+            text-align: center;
+            padding: 1rem 0;
+            position: relative;
+            width: 100%;
+            bottom: 10;
+        }
+
+        .container:hover {
+            color: #fd7e14;
+        }
+
+        .video-container {
+            position: relative;
+            width: 100%;
+            max-width: 1000px;
+            margin: 20px auto;
+            padding-top: 56.25%;
+            /* 16:9 Aspect Ratio */
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        .video-placeholder {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #000;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            text-align: center;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div>
+            <img src="The_Grand_Tour_Logo.svg.png" width="600px" height="120px" style="border-radius: 10px;"
+                alt="The Grand Tour Logo">
+            <h1 style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; font-size: 50px;"><b>The
+                    Excellent</b></h1>
+            <p style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; font-size: 18px;">A True Luxury SUV
+            </p>
+        </div>
+    </header>
+    <nav>
+        <div class="nav-links">
+            <a href="#home"><img src="The_Grand_Tour_Logo.svg.png" width="120" height="30"></a>
+            <a href="#home">Home</a>
+            <a href="#JEZZA">JEZZA</a>
+            <a href="#The_Grand_Tour">The Grand Tour</a>
+            <a href="#MORE">More</a>
+            <a href="#gallery">Gallery</a>
+            <a href="#contact">Contact</a>
+        </div>
+        <div class="navbar navbar-light bg-light">
+            <form class="d-flex">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success" type="submit"
+                    style="color: #e70a0a; border-color: #e70a0a;">Search</button>
+            </form>
+        </div>
+    </nav>
+
+    <div class="container" id="home">
+        <h1 class="welcome-title animate-on-scroll">Discover the Excellence of Legendary Handcraftmanship</h1>
+        <p class="welcome-text animate-on-scroll">The Excellent was a luxury car made by Jeremy Clarkson in attempts to
+            make a 'true luxury SUV' in one of the episode of <b>The Grand Tour (s01e09)</b>. Clarkson had the chassis
+            and engine of a Land Rover Discovery and the body of a
+            Mercedes SL bolted together. The original The Excellent was fitted with a chassis of a Land Rover Discovery,
+            with the body of a 1978 MG MGB, and used a 3.9-liter V8, that was named the MGD.</p>
+    </div>
+
+    <div class="container">
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            <div class="col">
+                <div class="card h-100">
+                    <img src="The Grand Tour.webp" class="card-img-top" alt="Carnage A Trois">
+                    <div class="card-body">
+                        <h5 class="card-title">Carnage A Trois</h5>
+                        <p class="card-text">The presenters travel from Crickenhowell, Wales through Leamington Spa,
+                            Warwickshire and end up at Beachy Head in Eastbourne, Sussex, while looking at the weird and
+                            wonderful cars of France.</p>
+                    </div>
+                    <div class="card-footer">
+                        <small class="text-muted">Last updated 3 mins ago</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card h-100">
+                    <img src="The-Grand-Tour-A-Massive-Hunt-1024x576.jpg" class="card-img-top" alt="A Massive Hunt">
+                    <div class="card-body">
+                        <h5 class="card-title">A Massive Hunt</h5>
+                        <p class="card-text">(Madagascar Special) The presenters travel to the Reunion Island in three
+                            high performance cars before modifying them for a treasure hunt across Madagascar.</p>
+                    </div>
+                    <div class="card-footer">
+                        <small class="text-muted">Last updated 45 mins ago</small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card h-100" id="playCard">
+                    <img src="hot.webp" class="card-img-top" alt="Uk's Sexiest Man Alive">
+                    <div class="card-body">
+                        <h5 class="card-title">Uk's Sexiest Man Alive</h5>
+                        <p class="card-text">Yes, Jeremy Clarkson has taken home the title for the second year running.
+                            The annual poll was carried out by IllicitEncounters, a site that prides itself as 'the best
+                            online dating site for married people'. Ahem.</p>
+                    </div>
+                    <div class="card-footer">
+                        <small class="text-muted">Last updated 48 mins ago</small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Audio element -->
+            <audio id="audioPlayer"
+                src="Journey - Separate Ways (Worlds Apart) (Official HD Video - 1983)(MP3_320K).mp3"></audio>
+
+            <!-- Modal structure -->
+            <div id="imageModal" class="modal">
+                <div class="modal-content">
+                    <span class="close">&times;</span>
+                    <img src="hot.webp" alt="Uk's Sexiest Man Alive">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container" id="JEZZA">
+        <img src="jc.jpg" width="100%" alt="Jeremy Clarkson" class="animate-on-scroll">
+        <h2 class="animated fadeIn animate-on-scroll">About Jeremy Clarkson</h2>
+        <p class="animated fadeIn animate-on-scroll">He is best known for the motoring programmes <b>Top Gear</b> and
+            <b>The Grand Tour</b> alongside Richard Hammond and James May. He also currently writes weekly columns for
+            The Sunday Times and The Sun. Clarkson hosts the ITV game show Who Wants to Be a Millionaire?, and co-hosts
+            the reality show Clarkson's Farm.
+        </p>
+    </div>
+
+    <div class="container" id="The_Grand_Tour">
+        <h2 class="animated fadeIn animate-on-scroll">The Grand Tour</h2>
+        <p class="animated fadeIn animate-on-scroll">The Grand Tour is a British motoring television series, created by
+            Jeremy Clarkson, Richard Hammond, James May, and Andy Wilman, made for Amazon exclusively for its online
+            streaming service Amazon Prime Video, and premiered on 18 November 2016. The programme was conceived in the
+            wake of the departure of Clarkson, Hammond, May, and Wilman from the BBC series Top Gear and was originally
+            contracted with 36 episodes over three years.</p>
+    </div>
+
+    <div class="container" id="MORE">
+        <h2 class="animated fadeIn animate-on-scroll">Making an Impression</h2>
+        <p class="animated fadeIn animate-on-scroll">Jeremy Clarkson gathered James May and Richard Hammond. Initially,
+            the two were annoyed by Clarkson's creation, which they stated was rubbish. To prove them wrong, Clarkson
+            drove along on the road. On the road, his co-presenters noticed several design flaws on the interior of the
+            Excellent which was unconvincing. Clarkson then decided to attract football players to get a positive
+            reaction. After leaving the football park area, Clarkson stated he would sell the Excellent for £14,000. As
+            Clarkson was determined to sell it at that value, the Excellent was set to auction. Initially, it was
+            retailing under £400, but as it raised in value, it was sold for £4,000, which was underappreciated.
+            However, in the first series of Clarkson Farm (s01e06), you can see that Clarkson kept the Excellent as one
+            of his genius modifications.</p>
+    </div>
+
+    <div class="container_img">
+        <img id="image" src="farm.png" alt="Farm">
+    </div>
+
+    <div class="container" id="furthermore">
+        <h2 class="animated fadeIn animate-on-scroll">Furthermore</h2>
+        <p class="animated fadeIn animate-on-scroll">Consequently, the MGD lacked proper features used in a car, such as
+            speedometers or brakes. Additionally, the MGD's body would slip off the chassis at times. Clarkson decided
+            to stop using the MGD after its failure to stay attached to the chassis. He then began development of The
+            Excellent after purchasing a 4.4-litre twin-turbocharged V8, which he fitted in an old Mercedes G-Wagen.
+            Clarkson kept the luxurious features found on the Mercedes G-Wagen and had the body modified to fit his
+            custom-built chassis. The Excellent was then tested on the Top Gear test track where it received positive
+            reviews from both his co-presenters and the audience. Despite some minor issues with handling, the Excellent
+            was hailed as a significant improvement over the MGD.</p>
+    </div>
+
+    <div class="container_img">
+        <div class="container_img">
+            <img id="image" src="The_Grand_Tour_Logo.svg.png" alt="Farm" width="33%">
+            <img id="image" src="The_Grand_Tour_Logo.svg.png" alt="Farm" width="33%">
+            <img id="image" src="The_Grand_Tour_Logo.svg.png" alt="Farm" width="33%">
+        </div>
+    </div>
+
+    <div class="container" id="gallery">
+        <h2 class="animated fadeIn animate-on-scroll">Gallery</h2>
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            <div class="col">
+                <div class="card h-100">
+                    <img src="1978-mg-b.jpg" class="card-img-top" alt="MGD">
+                    <div class="card-body">
+                        <h5 class="card-title">The MGD</h5>
+                        <p class="card-text">The MGD was the predecessor of The Excellent, featuring a chassis from a
+                            Land Rover Discovery and a body from a 1978 MG MGB.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card h-100">
+                    <img src="mercedes-sl-the-excellent.jpg" class="card-img-top" alt="The Excellent">
+                    <div class="card-body">
+                        <h5 class="card-title">The Excellent</h5>
+                        <p class="card-text">The Excellent, designed by Jeremy Clarkson, combines a luxurious interior
+                            with the robust chassis of a Land Rover Discovery.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card h-100">
+                    <img src="CFRM_S1_KeyArtAlt_Boxartweb_16x9_1920x1080_PV_en-GB.webp" class="card-img-top"
+                        alt="Clarkson's Farm">
+                    <div class="card-body">
+                        <h5 class="card-title">Clarkson's Farm</h5>
+                        <p class="card-text">Clarkson's Farm showcases Jeremy Clarkson's adventures in farming,
+                            featuring his various modifications and innovations.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Video Section -->
+    <div class="video-container" id="videoBox">
+        <div class="video-placeholder" id="videoPlaceholder">
+            <p>Loading video...</p>
+        </div>
+        <iframe id="videoIframe" src="https://www.youtube.com/watch?v=QAOZxT-NWLY" allowfullscreen></iframe>
+    </div>
+    </div>
+
+    <div class="container" id="contact">
+        <h2 class="animated fadeIn animate-on-scroll">Contact</h2>
+        <form>
+            <div class="mb-3">
+                <label for="name" class="form-label">Name</label>
+                <input type="text" class="form-control" id="name" placeholder="Your name">
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" id="email" placeholder="Your email">
+            </div>
+            <div class="mb-3">
+                <label for="message" class="form-label">Message</label>
+                <textarea class="form-control" id="message" rows="3" placeholder="Your message"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+
+    <br>
+
+    <footer>
+        <p>&copy; 2024 The Excellent. All rights reserved.</p>
+    </footer>
+
+
+
+    <script>
+        // Function to add the visible class when the element is in the viewport
+        function addVisibleClass() {
+            const elements = document.querySelectorAll('.animate-on-scroll');
+
+            elements.forEach(element => {
+                const position = element.getBoundingClientRect();
+                const windowHeight = window.innerHeight;
+
+                if (position.top < windowHeight && position.bottom > 0) {
+                    element.classList.add('visible-top');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', addVisibleClass);
+        window.addEventListener('load', addVisibleClass);
+    </script>
+    <script>
+        // JavaScript code to handle click events
+        document.addEventListener('DOMContentLoaded', function () {
+            const card = document.getElementById('playCard');
+            const audioPlayer = document.getElementById('audioPlayer');
+            const modal = document.getElementById('imageModal');
+            const closeBtn = document.querySelector('.close');
+
+            card.addEventListener('click', function () {
+                audioPlayer.play();
+                modal.style.display = 'flex';
+            });
+
+            closeBtn.addEventListener('click', function () {
+                modal.style.display = 'none';
+                audioPlayer.pause();
+            });
+
+            window.addEventListener('click', function (event) {
+                if (event.target == modal) {
+                    modal.style.display = 'none';
+                    audioPlayer.pause();
+                }
+            });
+
+            // Check video load
+            const videoIframe = document.getElementById('videoIframe');
+            const videoPlaceholder = document.getElementById('videoPlaceholder');
+
+            videoIframe.onload = function () {
+                videoPlaceholder.style.display = 'none';
+            };
+
+            videoIframe.onerror = function () {
+                videoPlaceholder.innerHTML = '<p>No Internet Connection</p>';
+            };
+        });
+    </script>
+</body>
+
+</html>
