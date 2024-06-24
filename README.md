@@ -44,17 +44,31 @@ JavaScript functionalities underpin key interactions:
 
 ## Screens
 
+Wallpaper
+
 ![Screenshot 2024-06-23 002328](https://github.com/devindu22/Jeremy_Clarkson/assets/114844896/a8d0b13a-4d01-48d9-a769-f6988bae7232)
+
+Navigation
 
 ![Screenshot 2024-06-23 002357](https://github.com/devindu22/Jeremy_Clarkson/assets/114844896/c70e63e8-0810-4a6f-910f-9de093ee9b63)
 
+Cards: hover
+
 ![Screenshot 2024-06-23 002426](https://github.com/devindu22/Jeremy_Clarkson/assets/114844896/7598c025-ae86-4d12-897f-1a9a903b7f6f)
+
+Modal
 
 ![Screenshot 2024-06-23 002710](https://github.com/devindu22/Jeremy_Clarkson/assets/114844896/4ae30277-bab3-4be9-8ade-25a69cbb0750)
 
+Carousel
+
 ![Screenshot 2024-06-23 002453](https://github.com/devindu22/Jeremy_Clarkson/assets/114844896/274be158-d503-40df-b9f6-379d2a8c8502)
 
+More Cards: hover
+
 ![Screenshot 2024-06-23 002508](https://github.com/devindu22/Jeremy_Clarkson/assets/114844896/8b9b6312-137d-4c2d-ba97-381236d30237)
+
+Contact Form
 
 ![Screenshot 2024-06-23 002531](https://github.com/devindu22/Jeremy_Clarkson/assets/114844896/954c97b3-b15d-4750-811b-0508eefc3a8d)
 
